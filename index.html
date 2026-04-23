@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Interview Prep — MBA Strategy & Ops</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #fafaf8; --surface: #ffffff; --surface2: #f4f3ef;
+    --ink: #1a1a18; --ink2: #3a3a36; --muted: #8a8a7a; --border: #e4e3de;
+    --accent: #c8531a; --accent2: #2d6a4f; --accent3: #1d4e89; --gold: #b8860b;
+    --tag-strategy: #1d4e89; --tag-ops: #2d6a4f; --tag-handson: #c8531a;
+    --tag-interview: #7b2d8b; --tag-data: #8b6914; --tag-trends: #b8860b;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--ink); font-family:'Outfit',sans-serif; font-weight:400; line-height:1.6; overflow-x:hidden; }
+  body::before { content:''; position:fixed; inset:0; background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px); background-size:40px 40px; opacity:0.3; pointer-events:none; z-index:0; }
+  .container { max-width:920px; margin:0 auto; padding:0 28px; position:relative; z-index:1; }
+
+  /* HEADER */
+  header { padding:64px 0 48px; }
+  .eyebrow { font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:3px; text-transform:uppercase; color:var(--accent); margin-bottom:16px; display:flex; align-items:center; gap:12px; }
+  .eyebrow::before { content:''; display:block; width:32px; height:2px; background:var(--accent); }
+  h1 { font-family:'Playfair Display',serif; font-size:clamp(38px,5.5vw,68px); font-weight:800; line-height:1.05; color:var(--ink); margin-bottom:20px; letter-spacing:-1px; }
+  h1 em { font-style:italic; color:var(--accent); }
+  .subtitle { font-size:16px; color:var(--ink2); max-width:560px; font-weight:300; line-height:1.7; margin-bottom:40px; border-left:3px solid var(--accent); padding-left:16px; }
+  .meta-row { display:flex; gap:0; flex-wrap:wrap; border:1px solid var(--border); border-radius:12px; overflow:hidden; max-width:680px; background:var(--surface); }
+  .meta-item { flex:1; min-width:110px; padding:16px 20px; border-right:1px solid var(--border); }
+  .meta-item:last-child { border-right:none; }
+  .meta-val { font-family:'Playfair Display',serif; font-size:26px; font-weight:700; color:var(--accent); line-height:1; margin-bottom:4px; }
+  .meta-label { font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); }
+
+  /* NOTES COVERAGE BANNER */
+  .notes-banner { background:#fff8f4; border:1px solid rgba(200,83,26,0.25); border-left:4px solid var(--accent); border-radius:0 12px 12px 0; padding:20px 24px; margin:32px 0 40px; }
+  .notes-banner h3 { font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--accent); margin-bottom:12px; }
+  .notes-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:8px; }
+  .note-item { display:flex; gap:8px; align-items:flex-start; font-size:12.5px; color:var(--ink2); line-height:1.4; }
+  .note-item .tick { color:var(--accent2); font-size:12px; flex-shrink:0; padding-top:1px; }
+
+  /* ROLE BANNER */
+  .role-banner { background:var(--ink); color:#f0efe8; border-radius:16px; padding:28px 32px; margin:0 0 48px; display:grid; grid-template-columns:1fr 1fr 1fr; gap:24px; }
+  .role-banner h3 { grid-column:1/-1; font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--accent); margin-bottom:4px; }
+  .role-col h4 { font-family:'Playfair Display',serif; font-size:15px; font-weight:700; color:#f0efe8; margin-bottom:10px; }
+  .role-col ul { list-style:none; display:flex; flex-direction:column; gap:5px; }
+  .role-col ul li { font-size:12px; color:#9a998e; display:flex; gap:8px; }
+  .role-col ul li::before { content:'·'; color:var(--accent); }
+
+  /* GLOSSARY */
+  .glossary { border:1px solid var(--border); border-radius:16px; padding:24px 28px; margin-bottom:52px; background:var(--surface); }
+  .glossary-title { font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--muted); margin-bottom:16px; }
+  .gloss-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:10px; }
+  .gloss-item { display:flex; gap:10px; align-items:flex-start; }
+  .gloss-term { font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--accent); min-width:110px; padding-top:1px; font-weight:500; }
+  .gloss-def { color:var(--ink2); font-size:12.5px; line-height:1.5; }
+
+  /* WEEK */
+  .week-block { margin-bottom:60px; }
+  .week-header { display:flex; align-items:baseline; gap:20px; margin-bottom:28px; padding-bottom:14px; border-bottom:2px solid var(--ink); }
+  .week-2 .week-header { border-bottom-color:var(--accent); }
+  .week-label { font-family:'Playfair Display',serif; font-size:32px; font-weight:800; color:var(--ink); }
+  .week-2 .week-label { color:var(--accent); }
+  .week-desc { font-size:14px; color:var(--muted); font-weight:300; font-style:italic; }
+
+  /* DAY CARDS */
+  .days-grid { display:flex; flex-direction:column; gap:12px; }
+  .day-card { background:var(--surface); border:1px solid var(--border); border-radius:12px; overflow:hidden; transition:box-shadow 0.2s,border-color 0.2s; }
+  .day-card:hover { border-color:#c0bfb8; box-shadow:0 4px 20px rgba(0,0,0,0.06); }
+  .day-card.open { border-color:var(--accent); box-shadow:0 4px 24px rgba(200,83,26,0.08); }
+  .day-header { display:flex; align-items:center; gap:16px; padding:18px 22px; cursor:pointer; user-select:none; }
+  .day-num { font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--muted); min-width:46px; letter-spacing:1px; }
+  .day-title { font-family:'Outfit',sans-serif; font-size:15px; font-weight:600; flex:1; color:var(--ink); line-height:1.3; }
+  .day-tag { font-family:'JetBrains Mono',monospace; font-size:9px; padding:4px 10px; border-radius:20px; text-transform:uppercase; letter-spacing:1.5px; font-weight:500; white-space:nowrap; }
+  .tag-strategy { background:rgba(29,78,137,0.1); color:var(--tag-strategy); border:1px solid rgba(29,78,137,0.2); }
+  .tag-ops      { background:rgba(45,106,79,0.1); color:var(--tag-ops); border:1px solid rgba(45,106,79,0.2); }
+  .tag-handson  { background:rgba(200,83,26,0.1); color:var(--tag-handson); border:1px solid rgba(200,83,26,0.2); }
+  .tag-interview{ background:rgba(123,45,139,0.1); color:var(--tag-interview); border:1px solid rgba(123,45,139,0.2); }
+  .tag-data     { background:rgba(139,105,20,0.1); color:var(--tag-data); border:1px solid rgba(139,105,20,0.2); }
+  .tag-trends   { background:rgba(184,134,11,0.1); color:var(--tag-trends); border:1px solid rgba(184,134,11,0.2); }
+  .tag-review   { background:rgba(138,138,122,0.12); color:var(--muted); border:1px solid var(--border); }
+  .chevron { color:var(--muted); font-size:11px; transition:transform 0.3s; flex-shrink:0; }
+  .day-card.open .chevron { transform:rotate(180deg); }
+  .day-body { display:none; padding:4px 22px 24px; border-top:1px solid var(--border); }
+  .day-card.open .day-body { display:block; }
+
+  /* BODY SECTIONS */
+  .day-section { margin-top:20px; }
+  .sec-label { font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--muted); margin-bottom:10px; }
+  .task-list { list-style:none; display:flex; flex-direction:column; gap:9px; }
+  .task-list li { display:flex; gap:10px; align-items:flex-start; font-size:13.5px; color:var(--ink2); line-height:1.55; }
+  .task-list li::before { content:'→'; color:var(--accent); font-size:12px; padding-top:2px; flex-shrink:0; }
+  .resource-links { display:flex; flex-direction:column; gap:7px; }
+  .resource-link { display:flex; align-items:center; gap:12px; font-size:13px; text-decoration:none; color:var(--ink2); background:var(--surface2); border:1px solid var(--border); border-radius:8px; padding:10px 14px; transition:background 0.15s,border-color 0.15s,color 0.15s; }
+  .resource-link:hover { background:rgba(200,83,26,0.06); border-color:rgba(200,83,26,0.3); color:var(--accent); }
+  .link-icon { font-size:14px; flex-shrink:0; }
+  .link-label { flex:1; font-weight:500; font-size:13px; }
+  .link-source { font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--muted); text-transform:uppercase; letter-spacing:1px; white-space:nowrap; }
+  .concept-box { background:var(--surface2); border-radius:10px; padding:16px 18px; font-size:13px; color:var(--ink2); line-height:1.7; }
+  .concept-box strong { color:var(--ink); font-weight:600; }
+  .prompt-box { background:#fdf6f2; border:1px solid rgba(200,83,26,0.2); border-left:3px solid var(--accent); border-radius:0 8px 8px 0; padding:14px 18px; font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--ink2); line-height:1.8; }
+  .iq-list { list-style:none; display:flex; flex-direction:column; gap:8px; }
+  .iq-list li { background:var(--surface2); border-radius:8px; padding:11px 15px; font-size:13px; color:var(--ink2); border-left:3px solid var(--tag-interview); line-height:1.5; }
+  .framework-box { background:var(--ink); border-radius:10px; padding:18px 20px; display:flex; flex-direction:column; gap:10px; }
+  .fw-step { display:flex; gap:14px; align-items:flex-start; }
+  .fw-num { font-family:'Playfair Display',serif; font-size:22px; font-weight:800; color:var(--accent); line-height:1; min-width:28px; }
+  .fw-content h5 { font-size:13px; font-weight:600; color:#f0efe8; margin-bottom:3px; }
+  .fw-content p { font-size:12px; color:#7a7a6e; line-height:1.5; }
+
+  /* DIVIDER */
+  .week-divider { display:flex; align-items:center; gap:20px; margin:48px 0; }
+  .week-divider::before,.week-divider::after { content:''; flex:1; height:1px; background:var(--border); }
+  .week-divider span { font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--muted); white-space:nowrap; }
+
+  /* MASTER Qs */
+  .master-qs { background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:28px 32px; margin-bottom:48px; }
+  .master-qs h3 { font-family:'Playfair Display',serif; font-size:20px; font-weight:800; margin-bottom:20px; color:var(--ink); }
+  .qs-category { margin-bottom:20px; }
+  .qs-cat-label { font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--muted); margin-bottom:10px; padding-bottom:6px; border-bottom:1px solid var(--border); }
+  .q-item { font-size:13px; color:var(--ink2); padding:8px 0; border-bottom:1px solid #f0efe8; display:flex; gap:10px; line-height:1.5; }
+  .q-item::before { content:'Q'; font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--accent); font-weight:500; padding-top:2px; flex-shrink:0; }
+
+  /* FINAL NOTE */
+  .final-note { border:1px solid var(--border); border-top:4px solid var(--ink); border-radius:0 0 16px 16px; padding:32px 36px; margin-bottom:80px; background:var(--surface); display:grid; grid-template-columns:1fr 1fr; gap:32px; }
+  .final-note h3 { font-family:'Playfair Display',serif; font-size:22px; font-weight:800; color:var(--ink); margin-bottom:12px; grid-column:1/-1; }
+  .final-col h4 { font-size:12px; font-family:'JetBrains Mono',monospace; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); margin-bottom:10px; }
+  .final-col ul { list-style:none; display:flex; flex-direction:column; gap:7px; }
+  .final-col ul li { font-size:13px; color:var(--ink2); display:flex; gap:8px; line-height:1.5; }
+  .final-col ul li::before { content:'✓'; color:var(--accent2); font-size:12px; }
+
+  @media(max-width:640px){
+    .role-banner,.final-note{grid-template-columns:1fr;}
+    .week-header{flex-direction:column;gap:4px;}
+    .day-tag{display:none;}
+    .notes-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <div class="eyebrow">MBA · Strategy + Ops · AI Interview Prep — v2 (Notes Updated)</div>
+  <h1>2 Weeks to <em>AI-Ready</em><br>for Your Interview</h1>
+  <p class="subtitle">Rebuilt for an MBA business owner / commercial strategy role. Every topic from your handwritten notes is now covered — with sources, links, and interview questions.</p>
+  <div class="meta-row">
+    <div class="meta-item"><div class="meta-val">14</div><div class="meta-label">Days</div></div>
+    <div class="meta-item"><div class="meta-val">1–2h</div><div class="meta-label">Per Day</div></div>
+    <div class="meta-item"><div class="meta-val">50+</div><div class="meta-label">Resources</div></div>
+    <div class="meta-item"><div class="meta-val">40+</div><div class="meta-label">Interview Qs</div></div>
+    <div class="meta-item"><div class="meta-val">100%</div><div class="meta-label">Notes Covered</div></div>
+  </div>
+</header>
+
+<!-- NOTES COVERAGE -->
+<div class="notes-banner">
+  <h3>✅ Everything from your handwritten notes — now covered in this schedule</h3>
+  <div class="notes-grid">
+    <div class="note-item"><span class="tick">✓</span><span>Ecosystem & GPT alternatives → Day 5</span></div>
+    <div class="note-item"><span class="tick">✓</span><span>AI Architecture, LLM, RAG → Days 2–3</span></div>
+    <div class="note-item"><span class="tick">✓</span><span>Tokenisation & cost of using AI → Day 5 (NEW)</span></div>
+    <div class="note-item"><span class="tick">✓</span><span>Most important tools — Claude vs others → Day 5</span></div>
+    <div class="note-item"><span class="tick">✓</span><span>Business cases — AI exec assistant, travel agent → Day 2 (NEW)</span></div>
+    <div class="note-item"><span class="tick">✓</span><span>Agentic AI + prioritisation-based schedules → Day 2</span></div>
+    <div class="note-item"><span class="tick">✓</span><span>Agentic → all use cases across sectors → Day 8 (NEW)</span></div>
+    <div class="note-item"><span class="tick">✓</span><span>In your industry → change via AI → Days 6, 12</span></div>
+    <div class="note-item"><span class="tick">✓</span><span>Future trends — AGI & what's next → Day 11 (NEW)</span></div>
+    <div class="note-item"><span class="tick">✓</span><span>Sector examples across sectors → Day 8 (NEW)</span></div>
+    <div class="note-item"><span class="tick">✓</span><span>AI governance & ethical AI → Day 11</span></div>
+    <div class="note-item"><span class="tick">✓</span><span>AI bias in banking/credit, why banks cautious → Day 11 (NEW)</span></div>
+    <div class="note-item"><span class="tick">✓</span><span>AI strategy framework → Days 4–5</span></div>
+    <div class="note-item"><span class="tick">✓</span><span>ROI & business case → Day 4</span></div>
+    <div class="note-item"><span class="tick">✓</span><span>Build vs buy vs partner → Day 5</span></div>
+    <div class="note-item"><span class="tick">✓</span><span>Data privacy, UAE PDPL → Day 11</span></div>
+  </div>
+</div>
+
+<!-- ROLE BANNER -->
+<div class="role-banner">
+  <h3>What This Role Actually Requires — Mapped to Your Schedule</h3>
+  <div class="role-col">
+    <h4>Strategy</h4>
+    <ul>
+      <li>AI opportunity identification</li>
+      <li>Build vs buy vs partner</li>
+      <li>AI roadmap & prioritisation</li>
+      <li>Competitive moat through AI</li>
+      <li>Vendor evaluation framework</li>
+    </ul>
+  </div>
+  <div class="role-col">
+    <h4>Commercial / P&L</h4>
+    <ul>
+      <li>ROI framework for AI</li>
+      <li>AI in sales, CRM, lending</li>
+      <li>Credit & fraud AI</li>
+      <li>Customer experience AI</li>
+      <li>Dynamic pricing with AI</li>
+    </ul>
+  </div>
+  <div class="role-col">
+    <h4>Operations</h4>
+    <ul>
+      <li>Process automation strategy</li>
+      <li>AI workflow tools</li>
+      <li>Change management</li>
+      <li>KPIs & measurement</li>
+      <li>Governance & ethical AI</li>
+    </ul>
+  </div>
+</div>
+
+<!-- GLOSSARY -->
+<div class="glossary">
+  <div class="glossary-title">⚡ Business Owner's AI Glossary — Know These Cold</div>
+  <div class="gloss-grid">
+    <div class="gloss-item"><span class="gloss-term">LLM</span><span class="gloss-def">The AI brain — trained on text, powers ChatGPT, Claude, Gemini</span></div>
+    <div class="gloss-item"><span class="gloss-term">AI Agent</span><span class="gloss-def">AI that takes actions, not just answers — books, sends, decides</span></div>
+    <div class="gloss-item"><span class="gloss-term">RAG</span><span class="gloss-def">Connecting AI to your own company data without retraining it</span></div>
+    <div class="gloss-item"><span class="gloss-term">Fine-tuning</span><span class="gloss-def">Retraining a model on your data — expensive, use RAG instead usually</span></div>
+    <div class="gloss-item"><span class="gloss-term">Hallucination</span><span class="gloss-def">AI confidently stating wrong facts — key risk to manage in ops</span></div>
+    <div class="gloss-item"><span class="gloss-term">Token</span><span class="gloss-def">Unit of text AI processes (~¾ of a word) — what you pay for in APIs</span></div>
+    <div class="gloss-item"><span class="gloss-term">Copilot</span><span class="gloss-def">AI embedded in existing tools (Excel, Word, Salesforce, etc.)</span></div>
+    <div class="gloss-item"><span class="gloss-term">AGI</span><span class="gloss-def">Artificial General Intelligence — AI that matches human-level reasoning across all tasks. Not here yet.</span></div>
+    <div class="gloss-item"><span class="gloss-term">AI Bias</span><span class="gloss-def">When AI perpetuates unfair patterns from training data — critical risk in credit/lending</span></div>
+    <div class="gloss-item"><span class="gloss-term">XAI</span><span class="gloss-def">Explainable AI — being able to explain why the AI made a decision. Required in regulated sectors.</span></div>
+    <div class="gloss-item"><span class="gloss-term">Build vs Buy</span><span class="gloss-def">Core AI strategy decision — when to custom-build vs use off-shelf</span></div>
+    <div class="gloss-item"><span class="gloss-term">PDPL / GDPR</span><span class="gloss-def">UAE & EU data privacy laws — governs what data you can send to AI APIs</span></div>
+  </div>
+</div>
+
+<!-- ═══════ WEEK 1 ═══════ -->
+<div class="week-block">
+  <div class="week-header">
+    <div class="week-label">Week One</div>
+    <div class="week-desc">AI Foundations through a Business Lens — understand enough to lead, evaluate, and decide</div>
+  </div>
+  <div class="days-grid">
+
+    <!-- DAY 1 -->
+    <div class="day-card" onclick="toggle(this)">
+      <div class="day-header">
+        <span class="day-num">DAY 01</span>
+        <span class="day-title">What AI Actually Is — and What It Isn't (The Business View)</span>
+        <span class="day-tag tag-strategy">Strategy</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="day-body">
+        <div class="day-section">
+          <div class="sec-label">What to do today</div>
+          <ul class="task-list">
+            <li>Watch McKinsey's "What is Generative AI?" — aimed at business leaders, not engineers</li>
+            <li>Read HBR's guide on using AI practically in business — sets the right mental model</li>
+            <li>Know the 3 things AI is <strong>good</strong> at: generating text/content, extracting info from documents, automating repetitive decisions</li>
+            <li>Know the 3 things AI is <strong>bad</strong> at: 100% accuracy, novel reasoning, knowing when it's wrong</li>
+            <li>Write down 5 processes from your career that AI could improve — you'll build on these all week</li>
+          </ul>
+        </div>
+        <div class="day-section">
+          <div class="sec-label">Resources & Links</div>
+          <div class="resource-links">
+            <a class="resource-link" href="https://www.mckinsey.com/featured-insights/mckinsey-explainers/what-is-generative-ai" target="_blank">
+              <span class="link-icon">📄</span><span class="link-label">What is Generative AI? — business leader explainer</span><span class="link-source">McKinsey</span>
+            </a>
+            <a class="resource-link" href="https://hbr.org/2023/11/how-to-use-ai-to-do-practical-things-a-new-guide" target="_blank">
+              <span class="link-icon">📄</span><span class="link-label">How to Use AI for Practical Business Tasks</span><span class="link-source">Harvard Business Review</span>
+            </a>
+            <a class="resource-link" href="https://www.youtube.com/watch?v=zjkBMFhNj_g" target="_blank">
+              <span class="link-icon">▶</span><span class="link-label">Intro to LLMs — best 1-hour beginner video (Karpathy)</span><span class="link-source">YouTube</span>
+            </a>
+          </div>
+        </div>
+        <div class="day-section">
+          <div class="sec-label">Key business distinction to memorise</div>
+          <div class="concept-box">
+            <p><strong>Hype:</strong> "AI will replace everything." <strong>Reality:</strong> AI is a productivity multiplier for knowledge work. Business owners who win identify <em>exactly which decisions and processes</em> AI can handle reliably — and which still need humans.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DAY 2 -->
+    <div class="day-card" onclick="toggle(this)">
+      <div class="day-header">
+        <span class="day-num">DAY 02</span>
+        <span class="day-title">AI Agents — What They Are, Real Use Cases & Agentic Applications</span>
+        <span class="day-tag tag-ops">Operations</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="day-body">
+        <div class="day-section">
+          <div class="sec-label">What to do today</div>
+          <ul class="task-list">
+            <li>Read Anthropic's "Building Effective Agents" — written for builders but perfectly understandable for business owners</li>
+            <li>Memorise: <strong>Chatbot = you ask, it answers. Agent = you give a goal, it figures out the steps and acts.</strong></li>
+            <li>Study these 4 real agentic application examples from your notes: <strong>AI Executive Assistant</strong> (manages calendar, drafts emails, books travel), <strong>Travel Assistant App</strong> (searches flights, books hotels, sends itinerary), <strong>Prioritisation-based Schedule Agent</strong> (reads tasks, ranks by urgency/impact, blocks calendar), <strong>Cloud Work Agent</strong> (monitors drive/email, flags action items, auto-routes documents)</li>
+            <li>Map to your industry: what would an agent do in auto-finance? (check credit → value car → draft approval → notify RM)</li>
+            <li>Know the 4 agent components as a business owner: <strong>Brain (LLM), Tools (what it can do), Memory (what it remembers), Goal (what it's trying to achieve)</strong></li>
+          </ul>
+        </div>
+        <div class="day-section">
+          <div class="sec-label">Agentic applications — real examples to memorise</div>
+          <div class="concept-box">
+            <p>
+              <strong>AI Exec Assistant:</strong> reads your calendar, drafts replies, schedules meetings, summarises overnight emails — acts like a chief of staff<br><br>
+              <strong>Travel Assistant:</strong> given "book me a trip to London next Tuesday under £800" — searches flights, hotels, compares options, books and sends confirmation<br><br>
+              <strong>Prioritisation Agent:</strong> reads your task list + calendar + emails → ranks what to do today → blocks time → sends you a morning briefing<br><br>
+              <strong>Business Operations Agent:</strong> monitors CRM, flags deals at risk, drafts follow-up messages, updates pipeline — removes admin from your RMs
+            </p>
+          </div>
+        </div>
+        <div class="day-section">
+          <div class="sec-label">Resources & Links</div>
+          <div class="resource-links">
+            <a class="resource-link" href="https://www.anthropic.com/research/building-effective-agents" target="_blank">
+              <span class="link-icon">📄</span><span class="link-label">Building Effective Agents — Anthropic's definitive guide</span><span class="link-source">Anthropic</span>
+            </a>
+            <a class="resource-link" href="https://www.salesforce.com/blog/ai-agent-use-cases/" target="_blank">
+              <span class="link-icon">📄</span><span class="link-label">AI Agent Use Cases Across Industries</span><span class="link-source">Salesforce</span>
+            </a>
+            <a class="resource-link" href="https://www.youtube.com/watch?v=F8NKVhkZZWI" target="_blank">
+              <span class="link-icon">▶</span><span class="link-label">AI Agents Explained for Business</span><span class="link-source">IBM · YouTube</span>
+            </a>
+          </div>
+        </div>
+        <div class="day-section">
+          <div class="sec-label">Interview questions to prep</div>
+          <ul class="iq-list">
+            <li>"What is the difference between an AI chatbot and an AI agent — give me a business example"</li>
+            <li>"Give me 3 examples of agentic AI applications you would build for a commercial team"</li>
+            <li>"Design an AI agent for our sales / ops / lending process"</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- DAY 3 -->
+    <div class="day-card" onclick="toggle(this)">
+      <div class="day-header">
+        <span class="day-num">DAY 03</span>
+        <span class="day-title">RAG & AI Architecture — How AI Uses Your Company's Own Data</span>
+        <span class="day-tag tag-strategy">Strategy</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="day-body">
+        <div class="day-section">
+          <div class="sec-label">What to do today</div>
+          <ul class="task-list">
+            <li>Read AWS's RAG explainer — plain English, no coding required</li>
+            <li>Understand the business problem RAG solves: LLMs know the world but not <em>your company</em> — RAG gives them access to your policies, data, and documents</li>
+            <li>Understand the high-level AI architecture stack a business owner should know: <strong>Data layer</strong> (your company data) → <strong>LLM layer</strong> (the brain) → <strong>Application layer</strong> (the product your users see) → <strong>Integration layer</strong> (how it connects to your CRM, ERP, etc.)</li>
+            <li>Know when to use RAG vs fine-tuning: <strong>RAG</strong> for dynamic/frequently updated data · <strong>Fine-tuning</strong> for behaviour/tone changes, not for adding new facts</li>
+          </ul>
+        </div>
+        <div class="day-section">
+          <div class="sec-label">Resources & Links</div>
+          <div class="resource-links">
+            <a class="resource-link" href="https://aws.amazon.com/what-is/retrieval-augmented-generation/" target="_blank">
+              <span class="link-icon">📄</span><span class="link-label">What is RAG? — plain English, no code</span><span class="link-source">AWS</span>
+            </a>
+            <a class="resource-link" href="https://www.databricks.com/glossary/retrieval-augmented-generation-rag" target="_blank">
+              <span class="link-icon">📄</span><span class="link-label">RAG with business use cases and diagrams</span><span class="link-source">Databricks</span>
+            </a>
+            <a class="resource-link" href="https://www.youtube.com/watch?v=T-D1OfcDW1M" target="_blank">
+              <span class="link-icon">▶</span><span class="link-label">RAG Explained in 5 Minutes</span><span class="link-source">IBM · YouTube</span>
+            </a>
+          </div>
+        </div>
+        <div class="day-section">
+          <div class="sec-label">Interview questions to prep</div>
+          <ul class="iq-list">
+            <li>"Explain RAG to a non-technical CFO in 60 seconds"</li>
+            <li>"What's the difference between RAG and fine-tuning — when would you use each?"</li>
+            <li>"Walk me through the AI architecture you would propose for a customer service chatbot that uses our internal policy documents"</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- DAY 4 -->
+    <div class="day-card" onclick="toggle(this)">
+      <div class="day-header">
+        <span class="day-num">DAY 04</span>
+        <span class="day-title">AI ROI — Building the Business Case</span>
+        <span class="day-tag tag-strategy">Strategy</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="day-body">
+        <div class="day-section">
+          <div class="sec-label">What to do today</div>
+          <ul class="task-list">
+            <li>Read McKinsey's State of AI 2024 — focus on the ROI and adoption sections</li>
+            <li>Learn the 4 AI value levers: <strong>Cost reduction</strong> · <strong>Revenue uplift</strong> · <strong>Risk reduction</strong> · <strong>Speed / TAT</strong></li>
+            <li>Practice building a simple AI business case: pick one process from your Day 1 list → estimate hours saved × cost per hour × volume = annual saving</li>
+            <li>Know key metrics: <strong>deflection rate</strong> (% queries handled by AI) · <strong>cost per query</strong> · <strong>TAT reduction</strong> · <strong>productivity uplift per FTE</strong></li>
+            <li>Read BCG's CEO guide to AI at scale — the executive framing interviewers expect from an MBA</li>
+          </ul>
+        </div>
+        <div class="day-section">
+          <div class="sec-label">Resources & Links</div>
+          <div class="resource-links">
+            <a class="resource-link" href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai" target="_blank">
+              <span class="link-icon">📄</span><span class="link-label">McKinsey State of AI 2024 — ROI data & benchmarks</span><span class="link-source">McKinsey</span>
+            </a>
+            <a class="resource-link" href="https://hbr.org/2023/07/how-to-build-an-ai-powered-organization" target="_blank">
+              <span class="link-icon">📄</span><span class="link-label">How to Build an AI-Powered Organisation</span><span class="link-source">Harvard Business Review</span>
+            </a>
+            <a class="resource-link" href="https://www.bcg.com/publications/2023/ceo-guide-to-ai-at-scale" target="_blank">
+              <span class="link-icon">📄</span><span class="link-label">CEO's Guide to AI at Scale</span><span class="link-source">BCG</span>
+            </a>
+          </div>
+        </div>
+        <div class="day-section">
+          <div class="sec-label">The AI ROI framework — memorise this</div>
+          <div class="framework-box">
+            <div class="fw-step"><div class="fw-num">1</div><div class="fw-content"><h5>Identify the process</h5><p>High-volume, repetitive, clear inputs/outputs — best candidates for AI</p></div></div>
+            <div class="fw-step"><div class="fw-num">2</div><div class="fw-content"><h5>Quantify current cost</h5><p>Hours per task × volume × cost per hour = baseline annual cost</p></div></div>
+            <div class="fw-step"><div class="fw-num">3</div><div class="fw-content"><h5>Estimate AI impact</h5><p>% reduction in time or FTEs × baseline = annual saving</p></div></div>
+            <div class="fw-step"><div class="fw-num">4</div><div class="fw-content"><h5>Subtract AI cost</h5><p>API cost + implementation + maintenance = total AI cost</p></div></div>
+            <div class="fw-step"><div class="fw-num">5</div><div class="fw-content"><h5>Calculate payback period</h5><p>Net saving ÷ upfront investment = months to break even</p></div></div>
+          </div>
+        </div>
+        <div class="day-section">
+          <div class="sec-label">Interview questions to prep</div>
+          <ul class="iq-list">
+            <li>"How would you build the business case for an AI investment to your CFO?"</li>
+            <li>"How do you measure whether an AI initiative has been successful?"</li>
+            <li>"What KPIs would you use to track an AI-powered customer service deployment?"</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- DAY 5 -->
+    <div class="day-card" onclick="toggle(this)">
+      <div class="day-header">
+        <span class="day-num">DAY 05</span>
+        <span class="day-title">AI Ecosystem — Models, Tools, Tokenisation & Cost of AI</span>
+        <span class="day-tag tag-strategy">Strategy</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="day-body">
+        <div class="day-section">
+          <div class="sec-label">What to do today</div>
+          <ul class="task-list">
+            <li>Learn the model landscape and what each is best known for (see concept box below)</li>
+            <li>Understand <strong>tokenisation & cost of AI</strong>: you pay per token (input + output). 1000 tokens ≈ 750 words. GPT-4o costs ~$5/million input tokens. For a business, this means: high-volume API calls add up — you need to estimate cost at scale before committing.</li>
+            <li>Know cost minimisation strategies: <strong>use smaller/cheaper models for simple tasks</strong> · cache common queries · use prompt compression · choose the right model tier (flash/haiku for speed, opus/4o for complexity)</li>
+            <li>Understand the 3 AI strategy options: <strong>Build</strong> (custom, expensive, differentiated) · <strong>Buy SaaS</strong> (fast, generic) · <strong>API/Partner</strong> (flexible, middle ground)</li>
+            <li>Visit artificialanalysis.ai — understand the model comparison leaderboard</li>
+          </ul>
+        </div>
+        <div class="day-section">
+          <div class="sec-label">Model landscape — what each is best known for</div>
+          <div class="concept-box">
+            <p>
+              <strong>OpenAI GPT-4o / o3</strong> — most widely used, best coding, powers ChatGPT. o3 is best for complex reasoning tasks.<br>
+              <strong>Anthropic Claude 3.5/3.7</strong> — best for long documents, nuanced writing, safety-critical applications. Most used in enterprise.<br>
+              <strong>Google Gemini 1.5/2.0</strong> — best multimodal (text + images + video + audio). Deepest Google Workspace integration.<br>
+              <strong>Meta Llama 3.3</strong> — open source, free to run on your own servers. Best for sensitive data (nothing leaves your infrastructure).<br>
+              <strong>Mistral Large</strong> — European open source, fast and efficient. Good for cost-sensitive deployments.<br><br>
+              <strong>As a business owner:</strong> don't be loyal to one model. Use the right model for the right task. Claude for docs/analysis, GPT-4o for coding/general, Gemini for multimodal, Llama for on-premise sensitive data.
+            </p>
+          </div>
+        </div>
+        <div class="day-section">
+          <div class="sec-label">Resources & Links</div>
+          <div class="resource-links">
+            <a class="resource-link" href="https://artificialanalysis.ai/leaderboards/models" target="_blank">
+              <span class="link-icon">🔧</span><span class="link-label">AI Model Leaderboard — compare all models on quality, speed, cost</span><span class="link-source">Artificial Analysis</span>
+            </a>
+            <a class="resource-link" href="https://openai.com/pricing" target="_blank">
+              <span class="link-icon">📄</span><span class="link-label">OpenAI API Pricing — understand token costs</span><span class="link-source">OpenAI</span>
+            </a>
+            <a class="resource-link" href="https://www.anthropic.com/pricing" target="_blank">
+              <span class="link-icon">📄</span><span class="link-label">Anthropic Claude Pricing — compare tiers</span><span class="link-source">Anthropic</span>
+            </a>
+            <a class="resource-link" href="https://platform.openai.com/tokenizer" target="_blank">
+              <span class="link-icon">🔧</span><span class="link-label">Tokeniser Tool — see exactly how text converts to tokens</span><span class="link-source">OpenAI</span>
+            </a>
+            <a class="resource-link" href="https://hbr.org/2023/11/the-right-way-to-build-your-ai-strategy" target="_blank">
+              <span class="link-icon">📄</span><span class="link-label">The Right Way to Build Your AI Strategy</span><span class="link-source">Harvard Business Review</span>
+            </a>
+          </div>
+        </div>
+        <div class="day-section">
+          <div class="sec-label">Build vs Buy vs Partner — decision matrix</div>
+          <div class="concept-box">
+            <p>
+              <strong>Build</strong> when: core to competitive advantage · unique proprietary data · long-term differentiation needed · have technical team · no off-shelf solution exists<br><br>
+              <strong>Buy (SaaS)</strong> when: commodity function · need speed to market · limited tech resources · standard use case (e.g. Salesforce Einstein for CRM AI, Zendesk AI for support)<br><br>
+              <strong>API/Partner</strong> when: need AI capabilities but not AI infrastructure · want flexibility to switch models · moderate customisation needed (e.g. call OpenAI/Anthropic API and build your own UI on top)<br><br>
+              <strong>Vendor evaluation questions to ask:</strong> How is my data used? Can I switch models? What's the uptime SLA? What happens to my data if I leave? Is it compliant with UAE PDPL?
+            </p>
+          </div>
+        </div>
+        <div class="day-section">
+          <div class="sec-label">Additional resources</div>
+          <div class="resource-links">
+            <a class="resource-link" href="https://www.gartner.com/en/articles/what-is-an-ai-platform" target="_blank">
+              <span class="link-icon">📄</span><span class="link-label">What to Look for in an AI Platform — vendor evaluation guide</span><span class="link-source">Gartner</span>
+            </a>
+            <a class="resource-link" href="https://a16z.com/ai-canon/" target="_blank">
+              <span class="link-icon">📄</span><span class="link-label">A16Z AI Canon — essential reading list for AI strategy</span><span class="link-source">Andreessen Horowitz</span>
+            </a>
+          </div>
+        </div>
+        <div class="day-section">
+          <div class="sec-label">Interview questions to prep</div>
+          <ul class="iq-list">
+            <li>"What's the difference between GPT-4o and Claude — when would you use each?"</li>
+            <li>"How would you estimate the cost of running an AI agent that handles 10,000 customer queries per month?"</li>
+            <li>"When would you build a custom AI solution vs buy an off-the-shelf product?"</li>
+            <li>"How would you evaluate and select an AI vendor for a customer service deployment?"</li>
+            <li>"What questions would you ask an AI vendor in a procurement process?"</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- DAY 6 -->
+    <div class="day-card" onclick="toggle(this)">
+      <div class="day-header">
+        <span class="day-num">DAY 06</span>
+        <span class="day-title">AI in Lending, Finance & Auto — Your Industry</span>
+        <span class="day-tag tag-ops">Operations</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="day-body">
+        <div class="day-section">
+          <div class="sec-label">What to do today</div>
+          <ul class="task-list">
+            <li>Understand AI in <strong>credit decisioning</strong>: ML models score creditworthiness using 100+ variables — faster, less biased if built well</li>
+            <li>Understand AI in <strong>document processing</strong>: OCR + AI reads payslips, bank statements, Emirates IDs, extracts data automatically</li>
+            <li>Understand AI in <strong>fraud detection</strong>: real-time pattern recognition on transactions — flags anomalies faster than any human analyst</li>
+            <li>Understand AI in <strong>vehicle valuation</strong>: computer vision + market data → automated pricing — directly relevant to Cars24</li>
+            <li>Read how Zest AI applies ML to lending decisions</li>
+          </ul>
+        </div>
+        <div class="day-section">
+          <div class="sec-label">Key AI use cases for your sector</div>
+          <div class="concept-box">
+            <p>
+              <strong>Credit scoring:</strong> ML on 100+ variables → faster, more accurate approvals<br>
+              <strong>Document AI:</strong> Auto-extract data from payslips, bank statements, IDs<br>
+              <strong>Fraud detection:</strong> Real-time transaction anomaly detection<br>
+              <strong>Vehicle valuation:</strong> Computer vision + market data → instant pricing<br>
+              <strong>Customer service agent:</strong> Handles loan status, EMI queries, document requests<br>
+              <strong>Collections AI:</strong> Predicts default risk, optimises outreach timing and channel
+            </p>
+          </div>
+        </div>
+        <div class="day-section">
+          <div class="sec-label">Resources & Links</div>
+          <div class="resource-links">
+            <a class="resource-link" href="https://www.mckinsey.com/industries/financial-services/our-insights/ai-in-banking-a-primer-for-banking-executives" target="_blank">
+              <span class="link-icon">📄</span><span class="link-label">AI in Banking — primer for executives</span><span class="link-source">McKinsey</span>
+            </a>
+            <a class="resource-link" href="https://zest.ai/resources/blog/ai-lending/" target="_blank">
+              <span class="link-icon">📄</span><span class="link-label">AI in Lending — how ML improves credit decisions</span><span class="link-source">Zest AI</span>
+            </a>
+            <a class="resource-link" href="https://www.pwc.com/gx/en/financial-services/assets/pdf/technology2020-and-beyond.pdf" target="_blank">
+              <span class="link-icon">📄</span><span class="link-label">AI in Financial Services — PwC report</span><span class="link-source">PwC</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DAY 7 -->
+    <div class="day-card" onclick="toggle(this)">
+      <div class="day-header">
+        <span class="day-num">DAY 07</span>
+        <span class="day-title">Week 1 Review + Hands-On: Prompt Engineering for Business</span>
+        <span class="day-tag tag-handson">Hands-on</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="day-body">
+        <div class="day-section">
+          <div class="sec-label">What to do today</div>
+          <ul class="task-list">
+            <li>Spend 30 min on <strong>Claude.ai</strong> — write real business prompts: draft a vendor evaluation, write an AI business case, summarise a policy doc</li>
+            <li>If you use Microsoft 365: activate <strong>Microsoft Copilot</strong> — use it in Word, Excel, or Outlook for 20 min. This is the most common AI tool in corporate environments.</li>
+            <li>Master the 4-part business prompt structure: <strong>Role + Context + Task + Format</strong> (see below)</li>
+            <li>Run the mock interview prompt below — answer every question out loud, not in your head</li>
+          </ul>
+        </div>
+        <div class="day-section">
+          <div class="sec-label">4-part business prompt template — memorise this</div>
+          <div class="prompt-box">
+Role: "You are a McKinsey strategy consultant."
+Context: "I am the Head of Revenue at a UAE auto-finance company with AED 50M ARR."
+Task: "Write a 1-page business case for deploying an AI agent to automate our loan document processing."
+Format: "Structure as: Problem / Solution / ROI. Under 300 words. Executive tone."
+          </div>
+        </div>
+        <div class="day-section">
+          <div class="sec-label">Week 1 mock interview prompt — paste into Claude/ChatGPT</div>
+          <div class="prompt-box">
+"Act as a senior interviewer hiring for an AI strategy role at a commercial tech company. Ask me 5 questions on: what AI is, what agents are, RAG, AI ROI, and build vs buy. One question at a time. After each answer give me direct feedback: what was strong, what was weak, and what to add. Rate my answer out of 10."
+          </div>
+        </div>
+        <div class="day-section">
+          <div class="sec-label">Resources & Links</div>
+          <div class="resource-links">
+            <a class="resource-link" href="https://claude.ai" target="_blank">
+              <span class="link-icon">🔧</span><span class="link-label">Claude.ai — use for prompting practice</span><span class="link-source">Anthropic</span>
+            </a>
+            <a class="resource-link" href="https://adoption.microsoft.com/en-us/copilot/" target="_blank">
+              <span class="link-icon">🔧</span><span class="link-label">Microsoft Copilot — AI in Word, Excel, Outlook</span><span class="link-source">Microsoft</span>
+            </a>
+            <a class="resource-link" href="https://learnprompting.org/docs/basics/intro" target="_blank">
+              <span class="link-icon">📄</span><span class="link-label">Prompt Engineering for Business Users</span><span class="link-source">LearnPrompting</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="week-divider"><span>End of Week One · Begin Week Two</span></div>
+
+<!-- ═══════ WEEK 2 ═══════ -->
+<div class="week-block week-2">
+  <div class="week-header">
+    <div class="week-label">Week Two</div>
+    <div class="week-desc">Sector Use Cases, Governance, Trends, Ethics & Full Interview Mastery</div>
+  </div>
+  <div class="days-grid">
+
+    <!-- DAY 8 -->
+    <div class="day-card" onclick="toggle(this)">
+      <div class="day-header">
+        <span class="day-num">DAY 08</span>
+        <span class="day-title">AI Use Cases Across Sectors — Business Cases by Industry</span>
+        <span class="day-tag tag-strategy">Strategy</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="day-body">
+        <div class="day-section">
+          <div class="sec-label">What to do today</div>
+          <ul class="task-list">
+            <li>Study the sector use case map below — be able to discuss AI application in at least 4 sectors confidently</li>
+            <li>For each sector: what's the biggest AI opportunity, what tool would you use, what's the main risk?</li>
+            <li>Read Salesforce's AI use case guide across industries</li>
+            <li>Read the McKinsey AI sector impact report — focus on financial services, retail, and healthcare as contrast to your auto/finance background</li>
+            <li>Prepare a 60-second "AI use case" story for your own sector that you can deliver confidently</li>
+          </ul>
+        </div>
+        <div class="day-section">
+          <div class="sec-label">Sector use case map — know at least 4 of these</div>
+          <div class="concept-box">
+            <p>
+              <strong>Auto / Mobility:</strong> Vehicle valuation AI, predictive maintenance, route optimisation, dealer performance scoring<br>
+              <strong>Financial Services / Lending:</strong> Credit scoring, fraud detection, document processing, collections AI, risk modelling<br>
+              <strong>Retail / E-commerce:</strong> Personalised recommendations, dynamic pricing, inventory forecasting, chatbot support<br>
+              <strong>Healthcare:</strong> Diagnostic imaging AI, clinical note summarisation, appointment scheduling agents, drug discovery<br>
+              <strong>Legal:</strong> Contract review, due diligence automation, case research, compliance monitoring<br>
+              <strong>HR / Recruitment:</strong> CV screening, interview scheduling agent, onboarding assistant, attrition prediction<br>
+              <strong>Real Estate:</strong> Property valuation AI, lead scoring, document automation, market trend analysis<br>
+              <strong>Logistics:</strong> Route optimisation, demand forecasting, warehouse automation, customs document processing
+            </p>
+          </div>
+        </div>
+        <div class="day-section">
+          <div class="sec-label">Resources & Links</div>
+          <div class="resource-links">
+            <a class="resource-link" href="https://www.salesforce.com/blog/ai-agent-use-cases/" target="_blank">
+              <span class="link-icon">📄</span><span class="link-label">AI Agent Use Cases Across Industries</span><span class="link-source">Salesforce</span>
+            </a>
+            <a class="resource-link" href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai" target="_blank">
+              <span class="link-icon">📄</span><span class="link-label">State of AI — sector impact breakdown</span><span class="link-source">McKinsey</span>
+            </a>
+            <a class="resource-link" href="https://hbr.org/2023/11/how-to-use-ai-to-do-practical-things-a-new-guide" target="_blank">
+              <span class="link-icon">📄</span><span class="link-label">AI in Business — practical HBR sector guide</span><span class="link-source">Harvard Business Review</span>
+            </a>
+          </div>
+        </div>
+        <div class="day-section">
+          <div class="sec-label">Interview questions to prep</div>
+          <ul class="iq-list">
+            <li>"Give me an AI use case from a sector outside your own and explain the business value"</li>
+            <li>"How is AI changing the competitive landscape in auto-tech / fintech?"</li>
+            <li>"Which sector do you think has the most to gain from AI in the next 3 years and why?"</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- DAY 9 -->
+    <div class="day-card" onclick="toggle(this)">
+      <div class="day-header">
+        <span class="day-num">DAY 09</span>
+        <span class="day-title">AI in Sales, CRM & Customer Experience Operations</span>
+        <span class="day-tag tag-ops">Operations</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="day-body">
+        <div class="day-section">
+          <div class="sec-label">What to do today</div>
+          <ul class="task-list">
+            <li>Read about <strong>Salesforce Einstein</strong> and <strong>HubSpot AI</strong> — AI embedded in CRM for lead scoring, pipeline forecasting, outreach automation</li>
+            <li>Understand <strong>AI lead scoring</strong>: models rank leads by conversion probability → sales team focuses on top 20% that convert 80%</li>
+            <li>Understand <strong>AI customer service</strong>: Intercom/Zendesk AI handles tier-1 queries, escalates complex ones to humans</li>
+            <li>Know key metrics: <strong>deflection rate</strong> · <strong>CSAT</strong> · <strong>first response time</strong> · <strong>cost per ticket</strong></li>
+            <li>Design your escalation model: when should AI hand off to a human? This is a business design decision, not a technical one.</li>
+          </ul>
+        </div>
+        <div class="day-section">
+          <div class="sec-label">Resources & Links</div>
+          <div class="resource-links">
+            <a class="resource-link" href="https://www.salesforce.com/products/einstein/overview/" target="_blank">
+              <span class="link-icon">📄</span><span class="link-label">Salesforce Einstein — AI in CRM explained for business</span><span class="link-source">Salesforce</span>
+            </a>
+            <a class="resource-link" href="https://blog.hubspot.com/sales/ai-sales-tools" target="_blank">
+              <span class="link-icon">📄</span><span class="link-label">AI Sales Tools — what's available and how they work</span><span class="link-source">HubSpot</span>
+            </a>
+            <a class="resource-link" href="https://www.intercom.com/blog/ai-customer-service/" target="_blank">
+              <span class="link-icon">📄</span><span class="link-label">AI Customer Service — what works and what doesn't</span><span class="link-source">Intercom</span>
+            </a>
+            <a class="resource-link" href="https://www.zendesk.com/blog/ai-customer-service/" target="_blank">
+              <span class="link-icon">📄</span><span class="link-label">AI in Customer Service — Zendesk's business guide</span><span class="link-source">Zendesk</span>
+            </a>
+            <a class="resource-link" href="https://hbr.org/2022/03/when-should-you-use-ai-to-solve-customer-service-problems" target="_blank">
+              <span class="link-icon">📄</span><span class="link-label">When to Use AI for Customer Service Problems</span><span class="link-source">Harvard Business Review</span>
+            </a>
+            <a class="resource-link" href="https://www.mckinsey.com/capabilities/growth-marketing-and-sales/our-insights/ai-powered-marketing-and-sales-reach-new-heights-with-generative-ai" target="_blank">
+              <span class="link-icon">📄</span><span class="link-label">AI in Marketing & Sales — McKinsey deep dive</span><span class="link-source">McKinsey</span>
+            </a>
+          </div>
+        </div>
+        <div class="day-section">
+          <div class="sec-label">Interview questions to prep</div>
+          <ul class="iq-list">
+            <li>"How would you use AI to improve the performance of a 15-person sales team?"</li>
+            <li>"How would you redesign our customer service operation using AI — what would you automate and what would you keep human?"</li>
+            <li>"What's your framework for deciding which customer queries to automate vs keep human?"</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- DAY 10 -->
+    <div class="day-card" onclick="toggle(this)">
+      <div class="day-header">
+        <span class="day-num">DAY 10</span>
+        <span class="day-title">Process Automation Strategy + Hands-On Build</span>
+        <span class="day-tag tag-handson">Hands-on</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="day-body">
+        <div class="day-section">
+          <div class="sec-label">What to do today</div>
+          <ul class="task-list">
+            <li>Learn the <strong>automation prioritisation matrix</strong>: plot processes on Volume × Repetitiveness — top right = automate first</li>
+            <li>Understand: <strong>RPA</strong> (rule-based, no AI) vs <strong>AI automation</strong> (handles unstructured data and judgement calls)</li>
+            <li>Sign up for <strong>n8n.io</strong> (free) — build one simple AI workflow: email arrives → AI summarises → sends to Slack. Takes 30 min, zero coding.</li>
+            <li>This is your <strong>hands-on project to mention in the interview</strong>: "I built an automation in n8n that..."</li>
+          </ul>
+        </div>
+        <div class="day-section">
+          <div class="sec-label">Automation prioritisation — what to automate first</div>
+          <div class="concept-box">
+            <p>
+              <strong>Automate immediately:</strong> High volume + repetitive + rule-based (document extraction, loan status updates, standard queries)<br><br>
+              <strong>Automate with human oversight:</strong> High volume + some judgement (credit pre-screening, lead scoring, anomaly flagging)<br><br>
+              <strong>Keep human:</strong> Low volume + relationship-critical + high complexity (large deal negotiation, complaints escalation, strategic decisions)
+            </p>
+          </div>
+        </div>
+        <div class="day-section">
+          <div class="sec-label">Resources & Links</div>
+          <div class="resource-links">
+            <a class="resource-link" href="https://n8n.io" target="_blank">
+              <span class="link-icon">🔧</span><span class="link-label">n8n — free no-code AI workflow builder (start here)</span><span class="link-source">n8n.io</span>
+            </a>
+            <a class="resource-link" href="https://docs.n8n.io/advanced-ai/intro-tutorial/" target="_blank">
+              <span class="link-icon">📄</span><span class="link-label">n8n AI Agent Tutorial — official quickstart, no coding</span><span class="link-source">n8n Docs</span>
+            </a>
+            <a class="resource-link" href="https://www.make.com/en" target="_blank">
+              <span class="link-icon">🔧</span><span class="link-label">Make.com — visual automation platform, free tier</span><span class="link-source">Make</span>
+            </a>
+            <a class="resource-link" href="https://www.mckinsey.com/capabilities/operations/our-insights/the-automation-imperative" target="_blank">
+              <span class="link-icon">📄</span><span class="link-label">The Automation Imperative — which processes to target</span><span class="link-source">McKinsey</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DAY 11 -->
+    <div class="day-card" onclick="toggle(this)">
+      <div class="day-header">
+        <span class="day-num">DAY 11</span>
+        <span class="day-title">AI Governance, Ethics, Bias & Future Trends (incl. AGI)</span>
+        <span class="day-tag tag-data">Governance</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="day-body">
+        <div class="day-section">
+          <div class="sec-label">What to do today</div>
+          <ul class="task-list">
+            <li><strong>AI Bias & Fairness (your notes: "banking not leaning to AI, credit system, housewife"):</strong> Understand why this is a real issue — AI trained on historical data can perpetuate discrimination. Example: a credit model trained on past approvals may systematically reject homemakers or certain demographics because they were underrepresented in historical data. Regulators in EU/UAE now require explainability.</li>
+            <li><strong>Explainable AI (XAI):</strong> Being able to explain <em>why</em> the AI made a decision — critical in lending, insurance, healthcare. "The model rejected this application because income-to-debt ratio was 0.8 and employment tenure was under 6 months" vs a black box answer.</li>
+            <li><strong>UAE PDPL:</strong> Know what personal data you can process with AI, consent requirements, and cross-border transfer rules</li>
+            <li><strong>Future trends — AGI & what's next:</strong> AGI = Artificial General Intelligence — AI that matches human-level reasoning across all tasks. Not here yet. Timeline is debated: OpenAI believes 2025–2030, most academics say much longer. Know: <strong>near-term trends</strong> (agentic AI, multimodal, browser-use agents) vs <strong>long-term</strong> (AGI, AI in physical world / robotics)</li>
+          </ul>
+        </div>
+        <div class="day-section">
+          <div class="sec-label">AI bias in credit/banking — the key example to know</div>
+          <div class="concept-box">
+            <p>
+              <strong>The problem:</strong> A bank trains an AI credit model on 10 years of approved loans. Historically, homemakers (often women) and recent immigrants were rarely approved. The AI learns this pattern and continues rejecting them — not because they're bad borrowers, but because of historical bias in the training data.<br><br>
+              <strong>Why banks are cautious about AI:</strong> Regulatory risk (cannot explain AI decisions to regulators), reputational risk (discrimination lawsuits), and reliability risk (model drift over time).<br><br>
+              <strong>The solution:</strong> Bias audits, diverse training data, XAI layers, human review for borderline cases, continuous monitoring.
+            </p>
+          </div>
+        </div>
+        <div class="day-section">
+          <div class="sec-label">Future trends to know — near-term and long-term</div>
+          <div class="concept-box">
+            <p>
+              <strong>Now (2025):</strong> Agentic AI is the dominant trend — AI that acts, not just answers · MCP standard for tool connectivity · Reasoning models (o3, Claude 3.7) that think step-by-step · Browser-use agents that operate websites like humans<br><br>
+              <strong>Next 3 years:</strong> AI in physical world (humanoid robots — Figure, Tesla Optimus) · Multimodal agents seeing/hearing/acting · AI colleagues that work autonomously for hours · Universal AI assistants embedded in all software<br><br>
+              <strong>Long-term (AGI):</strong> AI with general reasoning across all domains. Not here yet. Biggest debate in tech: OpenAI/Anthropic racing toward it, many researchers say it's decades away. As a business owner: don't bet on AGI, bet on the practical agentic tools available today.
+            </p>
+          </div>
+        </div>
+        <div class="day-section">
+          <div class="sec-label">Resources & Links</div>
+          <div class="resource-links">
+            <a class="resource-link" href="https://u.ae/en/information-and-services/justice-safety-and-the-law/digital-laws-in-the-uae/personal-data-protection-law" target="_blank">
+              <span class="link-icon">📄</span><span class="link-label">UAE Personal Data Protection Law — official summary</span><span class="link-source">UAE Government</span>
+            </a>
+            <a class="resource-link" href="https://www.anthropic.com/privacy" target="_blank">
+              <span class="link-icon">📄</span><span class="link-label">Anthropic Data Privacy Policy — what happens to your data via API</span><span class="link-source">Anthropic</span>
+            </a>
+            <a class="resource-link" href="https://openai.com/enterprise-privacy" target="_blank">
+              <span class="link-icon">📄</span><span class="link-label">OpenAI Enterprise Privacy — for business deployments</span><span class="link-source">OpenAI</span>
+            </a>
+            <a class="resource-link" href="https://www.ibm.com/topics/ai-hallucinations" target="_blank">
+              <span class="link-icon">📄</span><span class="link-label">AI Hallucinations — business risk management guide</span><span class="link-source">IBM</span>
+            </a>
+            <a class="resource-link" href="https://www.anthropic.com/news/core-views-on-ai-safety" target="_blank">
+              <span class="link-icon">📄</span><span class="link-label">Anthropic's Core Views on AI Safety — essential read</span><span class="link-source">Anthropic</span>
+            </a>
+            <a class="resource-link" href="https://www.ibm.com/topics/ai-ethics" target="_blank">
+              <span class="link-icon">📄</span><span class="link-label">AI Ethics — bias, fairness, and governance explained</span><span class="link-source">IBM</span>
+            </a>
+            <a class="resource-link" href="https://www.weforum.org/agenda/2024/01/artificial-general-intelligence-agi-explainer/" target="_blank">
+              <span class="link-icon">📄</span><span class="link-label">What is AGI? — plain English explainer</span><span class="link-source">World Economic Forum</span>
+            </a>
+            <a class="resource-link" href="https://openai.com/research/planning-for-agi-and-beyond" target="_blank">
+              <span class="link-icon">📄</span><span class="link-label">Planning for AGI and Beyond — OpenAI's own view</span><span class="link-source">OpenAI</span>
+            </a>
+          </div>
+        </div>
+        <div class="day-section">
+          <div class="sec-label">Interview questions to prep</div>
+          <ul class="iq-list">
+            <li>"Why are banks cautious about using AI for credit decisions — what are the risks?"</li>
+            <li>"What is AI bias and how would you manage it in a consumer lending product?"</li>
+            <li>"What is AGI and do you think it will happen in the next 5 years?"</li>
+            <li>"What AI trend excites you most right now — and what does it mean for our business?"</li>
+            <li>"What is your governance framework for AI decisions — who approves, who monitors, who overrides?"</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- DAY 12 -->
+    <div class="day-card" onclick="toggle(this)">
+      <div class="day-header">
+        <span class="day-num">DAY 12</span>
+        <span class="day-title">Change Management — Getting Your Team to Actually Use AI</span>
+        <span class="day-tag tag-strategy">Strategy</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="day-body">
+        <div class="day-section">
+          <div class="sec-label">What to do today</div>
+          <ul class="task-list">
+            <li>Read McKinsey's guide on AI adoption — the biggest failure mode is not the technology, it's the people</li>
+            <li>Know the 3 adoption barriers: <strong>fear</strong> (job replacement anxiety) · <strong>trust</strong> (does quality hold up?) · <strong>habit</strong> (people revert to what they know)</li>
+            <li>Know the change management playbook: <strong>pilot with champions → show quick wins → train broadly → embed in workflows → measure and celebrate</strong></li>
+            <li>Prepare: "How would you roll out an AI tool to a 50-person ops team who are resistant to change?" — this is a very high-probability question</li>
+          </ul>
+        </div>
+        <div class="day-section">
+          <div class="sec-label">Resources & Links</div>
+          <div class="resource-links">
+            <a class="resource-link" href="https://www.mckinsey.com/capabilities/people-and-organizational-performance/our-insights/the-organization-blog/overcoming-the-challenges-of-adopting-generative-ai" target="_blank">
+              <span class="link-icon">📄</span><span class="link-label">Overcoming Challenges of AI Adoption</span><span class="link-source">McKinsey</span>
+            </a>
+            <a class="resource-link" href="https://hbr.org/2023/09/how-to-help-your-team-adapt-to-ai" target="_blank">
+              <span class="link-icon">📄</span><span class="link-label">How to Help Your Team Adapt to AI</span><span class="link-source">Harvard Business Review</span>
+            </a>
+          </div>
+        </div>
+        <div class="day-section">
+          <div class="sec-label">Interview questions to prep</div>
+          <ul class="iq-list">
+            <li>"How would you get a team of 20 RMs to adopt an AI-powered CRM tool?"</li>
+            <li>"How do you balance AI automation with maintaining human relationships in B2B sales?"</li>
+            <li>"How would you upskill a commercial team on AI tools in 3 months on a limited budget?"</li>
+            <li>"How do you get buy-in from a CFO or CEO to invest AED 2M in an AI initiative?"</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- DAY 13 -->
+    <div class="day-card" onclick="toggle(this)">
+      <div class="day-header">
+        <span class="day-num">DAY 13</span>
+        <span class="day-title">Full Mock Interview — Business Owner AI Role</span>
+        <span class="day-tag tag-interview">Interview</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="day-body">
+        <div class="day-section">
+          <div class="sec-label">What to do today</div>
+          <ul class="task-list">
+            <li>Paste the full mock interview prompt below into Claude or ChatGPT — answer every question <strong>out loud</strong>, not in your head</li>
+            <li>Prepare your <strong>2-minute AI narrative</strong>: where you started → what you explored → what you built → what excites you → where you want to go</li>
+            <li>Prepare your answers for the 3 highest-probability questions (below)</li>
+            <li>Research the specific company — what AI tools or initiatives are they running? Mention them specifically.</li>
+          </ul>
+        </div>
+        <div class="day-section">
+          <div class="sec-label">Full mock interview prompt — paste into Claude/ChatGPT</div>
+          <div class="prompt-box">
+"Act as a senior interviewer hiring for a business owner / commercial strategy AI role at a UAE fintech/autotech company. I have an MBA and 6+ years in strategy and commercial roles. Ask me 10 interview questions one at a time covering: AI strategy, ROI, build vs buy, AI in lending/sales, sector use cases, tokenisation costs, process automation, AI bias and governance, future trends including AGI, and change management. After each answer give direct feedback: what was strong, what was missing, how an MBA interviewer would rate it out of 10, and what to add. Be tough but constructive."
+          </div>
+        </div>
+        <div class="day-section">
+          <div class="sec-label">3 highest-probability questions — prepare these cold</div>
+          <ul class="iq-list">
+            <li>"Walk me through how you would identify, prioritise, and implement an AI initiative from scratch at our company — from opportunity identification to ROI measurement"</li>
+            <li>"We are considering deploying an AI agent to handle customer financing queries. How would you approach this — what would you build, what would you buy, what are the risks, how would you measure success?"</li>
+            <li>"What excites you most about AI right now and how does it apply to what we're doing here?"</li>
+          </ul>
+        </div>
+        <div class="day-section">
+          <div class="sec-label">Resources & Links</div>
+          <div class="resource-links">
+            <a class="resource-link" href="https://claude.ai" target="_blank">
+              <span class="link-icon">🔧</span><span class="link-label">Claude.ai — paste the mock interview prompt here</span><span class="link-source">Anthropic</span>
+            </a>
+            <a class="resource-link" href="https://chat.openai.com" target="_blank">
+              <span class="link-icon">🔧</span><span class="link-label">ChatGPT — alternative mock interviewer</span><span class="link-source">OpenAI</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DAY 14 -->
+    <div class="day-card" onclick="toggle(this)">
+      <div class="day-header">
+        <span class="day-num">DAY 14</span>
+        <span class="day-title">Final Day — Company Research, Smart Questions & Confidence</span>
+        <span class="day-tag tag-review">Review</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="day-body">
+        <div class="day-section">
+          <div class="sec-label">What to do today</div>
+          <ul class="task-list">
+            <li>Google "[company name] AI strategy" and "[company name] artificial intelligence" — read every result from the past 12 months</li>
+            <li>Check their job descriptions — any AI/data/automation roles tell you exactly what they're building</li>
+            <li>Prepare 4 smart questions for the interviewer (below)</li>
+            <li>Review your 5 process automation ideas from Day 1 — can you now articulate an AI solution, ROI estimate, and implementation approach for each? That's your interview superpower.</li>
+            <li>Follow for last-minute updates: McKinsey QuantumBlack, HBR AI, @AnthropicAI on LinkedIn/X</li>
+          </ul>
+        </div>
+        <div class="day-section">
+          <div class="sec-label">4 smart questions to ask the interviewer</div>
+          <ul class="iq-list">
+            <li>"What AI initiatives are currently live in the business — and which are still in planning? I'd love to understand where the biggest opportunities sit."</li>
+            <li>"How are you thinking about the build vs buy decision — are you leaning toward integrating with existing platforms like Salesforce AI, or building custom agents?"</li>
+            <li>"What does the data infrastructure look like — do you have the clean, structured data needed to deploy AI effectively at scale?"</li>
+            <li>"What does success look like in this role after 6 months — is it one major AI initiative delivered, or broader capability building across the team?"</li>
+          </ul>
+        </div>
+        <div class="day-section">
+          <div class="sec-label">Resources & Links</div>
+          <div class="resource-links">
+            <a class="resource-link" href="https://www.deeplearning.ai/short-courses/" target="_blank">
+              <span class="link-icon">📄</span><span class="link-label">DeepLearning.ai — free 1-hour courses if you want to go deeper on any topic</span><span class="link-source">DeepLearning.ai</span>
+            </a>
+            <a class="resource-link" href="https://www.mckinsey.com/capabilities/quantumblack/our-insights" target="_blank">
+              <span class="link-icon">📄</span><span class="link-label">McKinsey QuantumBlack — AI insights for executives</span><span class="link-source">McKinsey</span>
+            </a>
+            <a class="resource-link" href="https://hbr.org/topic/subject/artificial-intelligence" target="_blank">
+              <span class="link-icon">📄</span><span class="link-label">HBR AI Articles — business strategy perspective</span><span class="link-source">Harvard Business Review</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- MASTER Q BANK -->
+<div class="master-qs">
+  <h3>Complete Interview Question Bank — 40 Questions</h3>
+
+  <div class="qs-category">
+    <div class="qs-cat-label">AI Strategy & Business Case</div>
+    <div class="q-item">How would you identify and prioritise AI opportunities in a business you've just joined?</div>
+    <div class="q-item">How do you build a business case for an AI investment? Walk me through your framework.</div>
+    <div class="q-item">When would you build a custom AI solution vs buy an off-the-shelf product?</div>
+    <div class="q-item">What makes a good vs a bad use case for AI? Give me examples of each.</div>
+    <div class="q-item">How would you create an AI roadmap for our business for the next 12 months?</div>
+    <div class="q-item">If you had AED 500k to invest in AI for our ops team, where would you spend it and why?</div>
+  </div>
+
+  <div class="qs-category">
+    <div class="qs-cat-label">AI Concepts — Business Level</div>
+    <div class="q-item">What is an AI agent and how is it different from a chatbot? Give me a business example.</div>
+    <div class="q-item">Explain RAG to a non-technical CFO in 60 seconds.</div>
+    <div class="q-item">What is the difference between RAG and fine-tuning — when would you use each?</div>
+    <div class="q-item">What are AI hallucinations and how do you manage the risk in a commercial context?</div>
+    <div class="q-item">What's the difference between GPT-4o and Claude — when would you use each for a business task?</div>
+    <div class="q-item">How would you estimate the monthly cost of running an AI agent handling 10,000 queries?</div>
+  </div>
+
+  <div class="qs-category">
+    <div class="qs-cat-label">Sector Use Cases & Commercial</div>
+    <div class="q-item">Give me 3 AI agent use cases you would build for a commercial operations team.</div>
+    <div class="q-item">How would you use AI to improve the performance of a 15-person RM sales team?</div>
+    <div class="q-item">How would you use AI in a lending business to improve TAT and reduce defaults?</div>
+    <div class="q-item">Give me an AI use case from a sector outside your own and explain the business value.</div>
+    <div class="q-item">How would you redesign our customer service operation using AI?</div>
+    <div class="q-item">Which processes in your last role would you automate with AI first — and why?</div>
+    <div class="q-item">How do you measure the success of an AI-powered ops initiative?</div>
+  </div>
+
+  <div class="qs-category">
+    <div class="qs-cat-label">Governance, Ethics & Bias</div>
+    <div class="q-item">Why are banks cautious about using AI for credit decisions — what are the specific risks?</div>
+    <div class="q-item">What is AI bias and how would you manage it in a consumer lending product?</div>
+    <div class="q-item">What is Explainable AI and why does it matter in regulated industries?</div>
+    <div class="q-item">What data privacy considerations apply before sending customer data to an AI API?</div>
+    <div class="q-item">What is your governance framework for AI — who approves, who monitors, who can override?</div>
+    <div class="q-item">What are the regulatory risks of using AI in financial services in the UAE?</div>
+  </div>
+
+  <div class="qs-category">
+    <div class="qs-cat-label">Trends, AGI & Future of AI</div>
+    <div class="q-item">What is AGI and do you think it will happen in the next 5 years?</div>
+    <div class="q-item">What AI trend excites you most right now and how does it apply to our business?</div>
+    <div class="q-item">How is AI changing the competitive landscape in auto-tech / fintech?</div>
+    <div class="q-item">What does the AI landscape look like in 3 years — what should companies be preparing for now?</div>
+  </div>
+
+  <div class="qs-category">
+    <div class="qs-cat-label">Change Management & Leadership</div>
+    <div class="q-item">How would you roll out an AI tool to a 50-person ops team that's resistant to change?</div>
+    <div class="q-item">How do you balance AI automation with maintaining human relationships in commercial roles?</div>
+    <div class="q-item">How would you upskill a commercial team on AI tools in 3 months on a limited budget?</div>
+    <div class="q-item">How do you get buy-in from a CFO or CEO to invest in AI?</div>
+  </div>
+
+  <div class="qs-category">
+    <div class="qs-cat-label">Situational & Scenario-Based</div>
+    <div class="q-item">Walk me through how you would identify, prioritise, and implement an AI initiative from scratch.</div>
+    <div class="q-item">We're considering an AI agent for dealer financing support — how would you approach this end to end?</div>
+    <div class="q-item">Tell me about an AI tool you've used recently — what did you use it for and what did you learn?</div>
+    <div class="q-item">What's the biggest risk companies face when deploying AI at scale and how do you mitigate it?</div>
+    <div class="q-item">We have a credit model that's rejecting 30% more applications than last year — could AI be causing bias here and how would you investigate?</div>
+  </div>
+</div>
+
+<!-- FINAL NOTE -->
+<div class="final-note">
+  <h3>You're More Ready Than You Think</h3>
+  <div class="final-col">
+    <h4>What you'll have after 2 weeks</h4>
+    <ul>
+      <li>Clear AI strategy frameworks applicable live in the interview</li>
+      <li>Industry-specific examples for lending, sales, and ops</li>
+      <li>Sector use cases across 8 industries you can discuss fluently</li>
+      <li>A real hands-on project to talk about (n8n workflow)</li>
+      <li>40 interview questions rehearsed out loud with feedback</li>
+      <li>AI bias, governance, and ethics knowledge most candidates miss</li>
+      <li>Informed view on AGI and future AI trends</li>
+      <li>Everything from your handwritten notes — covered</li>
+    </ul>
+  </div>
+  <div class="final-col">
+    <h4>What will set you apart</h4>
+    <ul>
+      <li>Connecting AI directly to P&L — cost saved, revenue added, TAT reduced</li>
+      <li>Knowing the risks and bias issues, not just the hype</li>
+      <li>Specific use cases from your own career in auto-finance</li>
+      <li>Having actually used the tools, not just read about them</li>
+      <li>Asking smarter questions than any other candidate</li>
+      <li>Showing you can lead adoption, not just deploy technology</li>
+      <li>A balanced view on AGI — informed but not naive</li>
+    </ul>
+  </div>
+</div>
+
+</div>
+<script>
+  function toggle(card) { card.classList.toggle('open'); }
+</script>
+</body>
+</html>
